@@ -1,0 +1,242 @@
+<!-- build from templates/main.html -->
+<div class="gc-hidden-message">
+    <div style="padding: 10px; border: 1px solid #aaa; border-radius: 10px;margin-bottom: 20px;">
+        Ooooops, something went wrong! If you can see this message, this is probably a misconfiguration in Grocery CRUD Enterprise!
+    </div>
+</div>
+<script type="text/x-handlebars-template" class="gc-table-title-caption">
+    <div class="gc-caption-title panel-heading{{#unless subjectPlural}} gc-hidden{{/unless}}">
+        {{subjectPlural}}
+    </div>
+</script>
+<script type="text/x-handlebars-template" class="search-button-template">
+    <div class="floatR l5 t5 gc-remove-filter-container hidden">
+        <button
+                type="button"
+                class="btn btn-danger gc-remove-filter-button">
+            <i class="fa fa-remove"></i>
+            {{i18n.filtering_remove_filters}}
+        </button>
+    </div>
+    <div class="floatR l5 search-button-container">
+        <a href="" class="btn btn-default gc-filter-button btn-outline-dark t5">
+            <i class="fa fa-filter"></i>
+            <span class="gc-filter-text hidden-xs">{{i18n.filtering_filter_text}}</span>
+            <span class="gc-filter-counter hidden">
+                <span class="gc-filter-counter-number">0</span>
+                <span class="gc-filter-counter-text hidden">{{i18n.filtering_filter_single}}</span>
+                <span class="gc-filter-counter-text-plural hidden">{{i18n.filtering_filter_plural}}</span>
+            </span>
+        </a>
+    </div>
+</script>
+<script type="text/x-handlebars-template" class="gc-table-row">
+    {{#each rows}}
+        <tr data-id="{{primaryKeyValue}}">
+            {{#each columnsData}}
+                <td>{{{value}}}</td>
+            {{/each}}
+        </tr>
+    {{/each}}
+</script>
+<div class="modal fade gc-filtering-modal gc-visible-but-hidden" role="dialog"><div class="gc-filtering-container"></div></div>
+<script type="text/x-handlebars-template" class="gc-footer-template">
+    <ul class="gc-pagination pagination {{#if isBootstrapV4}}pagination-bootstrap-v4{{/if}}">
+        <li class="disabled paging-first page-item">
+            <a href="#" class="page-link"><i class="fa fa-step-backward"></i></a>
+        </li>
+        <li class="prev disabled paging-previous page-item">
+            <a href="#" class="page-link"><i class="fa fa-chevron-left"></i></a>
+        </li>
+        <li class="page-item">
+            <span class="{{#unless isBootstrapV4}}page-number-input-container{{/unless}}">
+                <input type="number" value="1" class="form-control page-number-input" />
+            </span>
+        </li>
+        <li class="next paging-next page-item">
+            <a href="#" class="page-link"><i class="fa fa-chevron-right"></i></a>
+        </li>
+        <li class="paging-last page-item">
+            <a href="#" class="page-link"><i class="fa fa-step-forward"></i></a>
+        </li>
+    </ul>
+</script>
+ <div class="modal fade gc-error-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog gc-error-modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header"></div>
+                <div class="modal-body gc-error-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/x-handlebars-template" class="gc-modal-error-text-template">
+    <p>We can't process the response of the server. This is all we know about it:</p>
+    <p><strong>Summary:</strong> {{textStatus}}</p>
+    <p><strong>Error:</strong> {{errorThrown}}</p>
+    <strong>Response:</strong><br/>
+    <textarea class="gc-code-error-response" readonly="readonly">{{errorAsString}}</textarea><br/>
+    <div class="gc-error-message-html hidden"></div>
+    <a href="javascript:void(0)" class="btn btn-default gc-error-html-preview-button">Preview as HTML</a>
+</script>
+
+<script type="text/x-handlebars-template" class="gc-insert-modal-template">
+    <div class="modal fade gc-form-operation-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog gc-modal-dialog" role="document">
+            <form class="form-horizontal">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+                    <div class="modal-body gc-modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <label class="options-on-save">
+                            <input type="checkbox" checked="checked" class="gc-close-modal-on-save" /> {{i18n.close_modal_on_save}}
+                        </label> &nbsp; &nbsp;
+                        <button type="button" class="btn btn-default btn-outline-dark" data-dismiss="modal">{{i18n.close_modal}}</button>
+                        <button type="submit" class="btn btn-primary save-changes">{{i18n.modal_save}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-handlebars-template" class="gc-form-standalone-template">
+    <div class="gc-form-standalone gc-hidden">
+        <form class="form-horizontal">
+            <div class="panel panel-default">
+                <div class="gc-form-standalone-header gc-caption-title panel-heading">
+                    ...
+                </div>
+                <div class="gc-form-standalone-body">
+                    ...
+                </div>
+                <div class="gc-form-standalone-footer row">
+                    <div class="col-sm-3">
+                        <label class="options-on-save gc-hidden">
+                            <input type="checkbox" checked="checked" class="gc-close-modal-on-save" /> {{i18n.close_modal_on_save}}
+                        </label>
+                    </div>
+                    <div class="col-sm-9">
+                        <button type="button" class="btn btn-default btn-outline-dark gc-close-button">{{i18n.close_modal}}</button>
+                        <button type="submit" class="btn btn-primary save-changes">{{i18n.modal_save}}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/x-handlebars-template" class="gc-print-template">
+    <div id="table-container">
+        <div class="print-table">
+            <table>
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-handlebars-template" class="gc-print-header">
+    {{#each headerColumns}}
+        <th>
+            {{displayAs}}
+        </th>
+    {{/each}}
+</script>
+
+<script type="text/x-handlebars-template" class="gc-confirm-delete-single">
+    <div class="delete-single-confirmation modal fade">
+        <div class="modal-dialog gc-modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"></div>
+                <div class="modal-body delete-modal">
+                    <p>{{i18n.confirm_delete}}</p>
+                    <div class="content-to-delete"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-outline-dark gc-cancel-button" data-dismiss="modal">
+                        {{i18n.cancel}}
+                    </button>
+                    <button type="button" class="btn btn-danger delete-single-confirmation-button">
+                        {{i18n.action_delete}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/x-handlebars-template" class="gc-confirm-delete-multiple">
+    <div class="gc-delete-multiple-confirmation modal fade">
+        <div class="modal-dialog gc-modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"></div>
+                <div class="modal-body delete-modal">
+                    <p>
+                        {{{i18n.confirm_delete_multiple}}}
+                    </p>
+                    <div class="content-to-delete"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-outline-dark" data-dismiss="modal">
+                        {{i18n.cancel}}
+                    </button>
+                    <button type="button" class="btn btn-danger delete-multiple-confirmation-button">
+                        {{i18n.action_delete}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/x-handlebars-template" class="gc-loading-template">
+    <div class="loading-opacity hidden">
+        {{i18n.loading}}
+    </div>
+</script>
+<div class="gc-loading-opacity-container"></div>
+<div class="gc-grid-container panel panel-default">
+    <div class="table-container">
+        <form action="" method="post" autocomplete="off" class="gcrud-search-form">
+            <div class="gc-hidden-search-inputs"></div>
+            <div class="header-tools">
+                <div class="floatL t5 gc-add-button-container"></div>
+                <div class="gc-remove-filters floatR"></div>
+                <div class="gc-search-filter-button-container floatR"></div>
+                <div class="gc-print-button-container floatR"></div>
+                <div class="gc-export-button-container floatR"></div>
+                <div class="gc-settings-button-container floatR t5"></div>
+            </div>
+            <div class="gc-datagrid-table-container">
+                <table class="table table-bordered grocery-crud-table table-hover">
+                    <thead>
+                        <tr class="header-columns"></tr>
+                        <tr class="filter-row gc-search-row"></tr>
+                    </thead>
+                    <tbody class="gc-tbody"></tbody>
+                </table>
+            </div>
+            <div class="footer-tools">
+                    <div class="tmp-container"></div>
+                    <div class="paging-entries-container floatL"></div>
+                    <div class="floatR r5 gc-pagination-container"></div>
+                    <div class="gc-hidden-inputs">
+                        <input type="hidden" name="page_number" class="page-number-hidden" value="1" />
+                        <input type="hidden" class="gc-order-by-hidden" value="" />
+                        <input type="hidden" class="gc-sorting-hidden" value="" />
+
+                        <span class="current-total-results hidden"></span>
+                        <span class="full-total hidden"></span>
+                    </div>
+                    <div class="displaying-paging-container floatR"></div>
+                    <div class="clear"></div>
+            </div>
+        </form>
+    </div>
+</div>
